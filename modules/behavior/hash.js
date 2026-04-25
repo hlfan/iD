@@ -15,8 +15,12 @@ import { prefs } from '../core/preferences';
 
 const dispatch = d3_dispatch('change');
 
+export function getHashParams() {
+    return utilStringQs(window.location.hash);
+}
+
 function getNewHash(arg) {
-    const original = utilStringQs(window.location.hash);
+    const original = getHashParams();
     const update = typeof arg === 'function' ? arg(original) : arg;
     if (!update || typeof update !== 'object') return;
 
@@ -151,7 +155,7 @@ export function behaviorHash(context) {
     var _throttledUpdateTitle = throttle(updateTitle, 500);
 
     function hashchange() {
-        var q = utilStringQs(window.location.hash);
+        var q = getHashParams();
 
         if (q.theme) {
           context.theme(q.theme);
@@ -215,7 +219,7 @@ export function behaviorHash(context) {
         d3_select(window)
             .on('hashchange.behaviorHash', hashchange);
 
-        var q = utilStringQs(window.location.hash);
+        var q = getHashParams();
 
         if (q.id) {
             // targeting specific features: download, select, and zoom to them

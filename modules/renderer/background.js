@@ -11,9 +11,9 @@ import { fileFetcher } from '../core/file_fetcher';
 import { geoMetersToOffset, geoOffsetToMeters, geoExtent } from '../geo';
 import { rendererBackgroundSource } from './background_source';
 import { rendererTileLayer } from './tile_layer';
-import { utilAesDecrypt, utilStringQs } from '../util';
+import { utilAesDecrypt } from '../util';
 import { utilRebind } from '../util/rebind';
-import { patchHash } from '../behavior';
+import { patchHash, getHashParams } from '../behavior';
 
 
 let _imageryIndex = null;
@@ -445,7 +445,7 @@ export function rendererBackground(context) {
   background.init = () => {
     const loadPromise = background.ensureLoaded();
 
-    const hash = utilStringQs(window.location.hash);
+    const hash = getHashParams();
     const requestedBackground = hash.background || hash.layer;
     const lastUsedBackground = prefs('background-last-used');
 

@@ -3,9 +3,10 @@ import { escape } from 'es-toolkit/compat';
 
 import { fileFetcher } from './file_fetcher';
 import { utilDetect } from '../util/detect';
-import { utilExpandLocaleCode, utilStringQs } from '../util';
+import { utilExpandLocaleCode } from '../util';
 import { utilArrayUniq } from '../util/array';
 import { presetsCdnUrl } from '../../config/id.js';
+import { getHashParams } from '../behavior/hash';
 
 export type LanguagesJSON = {
     [localeCode: string]: {
@@ -250,7 +251,7 @@ export class coreLocalizer {
 
         const currentData = this._dataLocales[this._localeCode] || this._dataLocales[this._languageCode];
 
-        const hash = utilStringQs(window.location.hash);
+        const hash = getHashParams();
 
         if (hash.rtl === 'true') {
             this._textDirection = 'rtl';

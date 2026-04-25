@@ -8,7 +8,7 @@ import { modeBrowse } from '../../modes/browse';
 import { createEntity } from '../../osm/create-entity';
 import { svgIcon } from '../../svg/icon';
 import { uiCurtain } from '../curtain';
-import { utilArrayDifference, utilArrayUniq, utilStringQs } from '../../util';
+import { utilArrayDifference, utilArrayUniq } from '../../util';
 
 import { uiIntroWelcome } from './welcome';
 import { uiIntroNavigation } from './navigation';
@@ -17,7 +17,7 @@ import { uiIntroArea } from './area';
 import { uiIntroLine } from './line';
 import { uiIntroBuilding } from './building';
 import { uiIntroStartEditing } from './start_editing';
-import { patchHash } from '../../behavior';
+import { patchHash, getHashParams } from '../../behavior';
 
 
 const chapterUi = {
@@ -68,7 +68,7 @@ export function uiIntro(context) {
     // Save current map state
     let osm = context.connection();
     let history = context.history().toJSON();
-    let hash = utilStringQs(window.location.hash);
+    let hash = getHashParams();
     let center = context.map().center();
     let zoom = context.map().zoom();
     let background = context.background().baseLayerSource();

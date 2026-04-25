@@ -2,8 +2,7 @@ import { dispatch as d3_dispatch } from 'd3-dispatch';
 
 import { services } from '../services';
 import { utilRebind } from '../util/rebind';
-import { utilStringQs } from '../util';
-import { patchHash } from '../behavior';
+import { patchHash, getHashParams } from '../behavior';
 
 
 export function rendererPhotos(context) {
@@ -204,7 +203,7 @@ export function rendererPhotos(context) {
      * Inits the streetlevel layer given the saved values in the URL
      */
     photos.init = function() {
-        var hash = utilStringQs(window.location.hash);
+        var hash = getHashParams();
         var parts;
         if (hash.photo_dates) {
             // expect format like `photo_dates=2019-01-01_2020-12-31`, but allow a couple different separators

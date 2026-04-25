@@ -4,9 +4,9 @@ import { prefs } from '../core/preferences';
 import { osmIdManager } from '../osm';
 import { osmLanduseTags, osmLifecyclePrefixes } from '../osm/tags.js';
 import { utilRebind } from '../util/rebind';
-import { utilArrayGroupBy, utilArrayUnion, utilStringQs } from '../util';
+import { utilArrayGroupBy, utilArrayUnion } from '../util';
 import { isAddressPoint } from '../svg/labels';
-import { patchHash } from '../behavior';
+import { patchHash, getHashParams } from '../behavior';
 
 
 export function rendererFeatures(context) {
@@ -611,7 +611,7 @@ export function rendererFeatures(context) {
 
 
     features.init = function() {
-        const hash = utilStringQs(window.location.hash).disable_features;
+        const hash = getHashParams().disable_features;
         const storage = prefs('disabled-features');
 
         if (hash) {

@@ -16,7 +16,8 @@ import { presetManager } from '../presets';
 import { rendererBackground, rendererFeatures, rendererMap, rendererPhotos } from '../renderer';
 import { services } from '../services';
 import { uiInit } from '../ui/init';
-import { utilKeybinding, utilRebind, utilStringQs, utilCleanOsmString } from '../util';
+import { utilKeybinding, utilRebind, utilCleanOsmString } from '../util';
+import { getHashParams } from '../behavior';
 import { ApiError } from '../util/error';
 import type { coreGraph } from '.';
 import type { Vec2 } from '../geo/vector';
@@ -184,7 +185,7 @@ export function coreContext(this: object): coreContext {
   context.privacyVersion = '20201202';
 
   // iD will alter the hash so cache the parameters intended to setup the session
-  context.initialHashParams = window.location.hash ? utilStringQs(window.location.hash) : {};
+  context.initialHashParams = getHashParams();
 
   /* Changeset */
   // An osmChangeset object. Not loaded until needed.
