@@ -116,6 +116,7 @@ export function utilDetect(refresh?: boolean) {
   /* Host */
   let loc;
   try {
+    if (window.top?.location.href) _detected.host = window.top.location.href;
     loc = window.top!.location;
   } catch {
     loc = window.location;
